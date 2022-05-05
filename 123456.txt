@@ -1,0 +1,170 @@
+practical 4 calc
+
+echo "Enter Two numbers : "
+read a
+read b
+ 
+# Input type of operation
+echo "Enter Choice :"
+echo "1. Addition"
+echo "2. Subtraction"
+echo "3. Multiplication"
+echo "4. Division"
+read ch
+ 
+# Switch Case to perform
+# calculator operations
+case $ch in
+  1)res=`echo $a + $b | bc`
+  ;;
+  2)res=`echo $a - $b | bc`
+  ;;
+  3)res=`echo $a \* $b | bc`
+  ;;
+  4)res=`echo "scale=2; $a / $b" | bc`
+  ;;
+esac
+echo "Result : $res"
+
+practical 5 mark
+
+echo "Enter marks(out of 30) of "
+read -p "Subject 1: " s1
+read -p "Subject 2: " s2
+read -p "Subject 3: " s3
+sum=`expr $s1 + $s2 + $s3`
+echo "Sum of marks of 3 subjects is : "$sum
+per=`expr $sum \* 10 / 9`
+echo "Percentage: "$per
+if [ $per -ge 60 ]
+then
+        echo "you got Distinction"
+elif [ $per -ge 50 ]
+then
+        echo "you got First class"
+elif [ $per -ge 40 ]
+then
+        echo "You got second class"
+else
+        echo "sorry you failed! better luck next time"
+fi
+
+practical 6 palindrome
+
+echo "Enter the number"
+read n
+function pal
+{
+number=$n
+reverse=0
+while [ $n -gt 0 ]
+do
+a=`expr $n % 10 `
+n=`expr $n / 10 `
+reverse=`expr $reverse \* 10 + $a`
+done
+echo $reverse
+if [ $number -eq $reverse ]
+then
+    echo "Number is palindrome"
+else
+    echo "Number is not palindrome"
+fi
+}
+r=`pal $n`
+echo "$r"
+
+practical 7 facto
+
+echo "Enter a number"
+read num
+
+fact=1
+
+while [ $num -gt 1 ]
+do
+  fact=$((fact * num))  #fact = fact * num
+  num=$((num - 1))      #num = num - 1
+done
+
+echo $fact
+
+practical 8 fibo
+
+echo "How many number of terms to be generated ?"
+  read n
+function fib
+{
+  x=0
+  y=1
+  i=2
+  echo "Fibonacci Series up to $n terms :"
+  echo "$x"
+  echo "$y"
+  while [ $i -lt $n ]
+  do
+      i=`expr $i + 1 `
+      z=`expr $x + $y `
+      echo "$z"
+      x=$y
+      y=$z
+  done
+}
+r=`fib $n`
+echo "$r"
+
+practical 9 menu
+
+i=0
+while [ $i != 6 ]
+do
+echo "Menu
+1. Display calender of current Month
+2. Display today's date and time
+3. Display usernames of those who are currently logged in the ststem
+4. Display your name at given x, y position
+5. Display Terminal Number
+6. Exit
+Choose your option and enter corresponding value"
+ 
+        read i
+        case "$i" in
+                1) calender="$(cal)"
+                        echo "Here is your Calender "
+                        echo "$calender"
+                        ;;
+                2) current="$(date)"
+                        echo "Current Date and Time is " "$current"
+                        ;;
+                3) username="$(whoami)"
+                        echo "Currently logged in users : "
+                        echo $username
+                        ;;
+                4)                         
+                        ;;
+                5) 
+                        ;;
+esac
+done 
+
+practical 10 dtw
+
+clear
+echo "Welcome , "$(who m i | tr -s " " |cut -d " " -f1)
+hour=$(date +"%H")
+if [ $hour -gt 0 -a $hour -le 12 ]
+then
+    echo "Good Morning"
+elif [ $hour -gt 12 -a $hour -le 17 ]
+then
+    echo "Good afternoon"
+elif [ $hour -gt 17  -a $hour -le 19 ]
+then
+    echo "Good evening"
+elif [ $hour -gt 19 -a $hour -le 24 ]
+then
+    echo "Good night"
+fi
+echo "Date :"$(date +"%d/%m/%Y")
+echo "Time :"$(date +"%r")
+
